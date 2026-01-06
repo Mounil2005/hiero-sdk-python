@@ -26,6 +26,10 @@ permissions:
 jobs:
   check-linked-issue:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+      issues: write
 
     concurrency:
       group: bot-pr-missing-linked-issue-${{ github.event.pull_request.number || github.event.inputs.pr_number }}
@@ -49,6 +53,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const script = require('./.github/scripts/bot-pr-missing-linked-issue.js');
             await script({ github, context });
