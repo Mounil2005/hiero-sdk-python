@@ -9,7 +9,6 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.
 ### Changed
 
 ### Tests
-- Format account test files with Black (#1519)
 - Improve unit test coverage for `Hbar`, including edge cases, validation, comparisons, and hashing. (#1483)
 - Formatted unit test files using Black.
 
@@ -113,6 +112,7 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.
 - Added prompt for coderabbit to review `Query` and it's sub-classes.
 - Add StakingInfo class ([1364](https://github.com/hiero-ledger/hiero-sdk-python/issues/1364))
 - Added first-class support for EVM address aliases in `AccountId`, including parsing, serialization, Mirror Node population helpers.
+- Added dry-run support and refactored `bot-workflows.yml` to use dedicated script `.github/scripts/bot-workflows.sh` for improved maintainability and testability. (#1288)
 
 ### Changed
 - Update the acceptance criteria wording in the issue templates to improve clarity and consistency for contributors (#1491)
