@@ -104,8 +104,8 @@ if [[ -z "$PR_NUMBER" ]]; then
     echo "No PR associated with workflow run $FAILED_RUN_ID, but DRY_RUN=1 - exiting successfully."
     exit 0
   else
-    echo "ERROR: Failed to query workflow run $FAILED_RUN_ID (check token permissions and repo access?)"
-    exit 1
+    echo "INFO: No open PR found for branch '$HEAD_BRANCH' (workflow run $FAILED_RUN_ID). Nothing to notify."
+    exit 0
   fi
 fi
 
