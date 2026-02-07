@@ -32,6 +32,7 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.
 - Format `tests/unit/custom_fee_test.py` with black for code style consistency. (#1525)
 
 ### Added
+- Add staking_info fields (`staked_account_id`, `staked_node_id`, `decline_staking_reward`) to ContractInfo class to expose staking metadata from protobuf. (#1365)
 - Added logging in bot-gfi-assign-on-comment.js to prevent silent skips. (`#1668`)
 - Added `AssessedCustomFee` domain model to represent assessed custom fees. (`#1637`)
 - Add __repr__ method for ContractId class to improve debugging (#1714)
