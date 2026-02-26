@@ -27,6 +27,8 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.
 - Refactored contract_delete_transaction example to use Client.from_env. (#1823)
 
 ### Docs
+
+- docs: Improving formatting will make the pull request process clearer. (`#1858`)
 - Added Python compatibility badge to README for improved visibility of supported versions (#1830)
 - Fixed Test Improvements header formatting in Good First Issue guidelines by adding missing space before parenthetical and removing stray bold marker (#1829)
 - Improved Google-style docstring for `compress_point_unchecked` in `crypto_utils.py`. (#1625)
