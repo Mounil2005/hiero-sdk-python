@@ -286,7 +286,7 @@ class TransactionGetReceiptQuery(Query):
             A list of TransactionReceipt objects
         """
         return [
-            TransactionReceipt._from_proto(receipt_proto, self.transaction_id)
+            TransactionReceipt._from_proto(receipt_proto, None)
             for receipt_proto in receipts
         ]
 
