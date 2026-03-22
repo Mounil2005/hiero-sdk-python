@@ -275,18 +275,21 @@ class TransactionGetReceiptQuery(Query):
             TransactionReceipt._from_proto(response.transactionGetReceipt.receipt, self.transaction_id),
         )
 
-    def _map_receipt_list(self, receipts:  List[transaction_receipt_pb2.TransactionReceipt]) -> List["TransactionReceipt"]:
+    def _map_receipt_list(self, receipts:  List[transaction_receipt_pb2.TransactionReceipt], include_parent_tx_id: bool = False) -> List["TransactionReceipt"]:
         """
         Maps a list of protobuf transaction receipts to TransactionReceipt objects.
 
         Args:
             receipts: A list of protobuf TransactionReceipt objects
+            include_parent_tx_id: If True, pass parent transaction_id to mapped receipts (for duplicates).
+                                 If False, pass None (for child receipts).
 
         Returns:
             A list of TransactionReceipt objects
         """
+        transaction_id = self.transaction_id if include_parent_tx_id else None
         return [
-            TransactionReceipt._from_proto(receipt_proto, None)
+            TransactionReceipt._from_proto(receipt_proto, transaction_id)
             for receipt_proto in receipts
         ]
 
@@ -317,15 +320,19 @@ class TransactionGetReceiptQuery(Query):
         parent = TransactionReceipt._from_proto(response.transactionGetReceipt.receipt, self.transaction_id)
 
         if self.include_children:
+            # Child receipts are sub-transactions; they don't need parent transaction_id
             children = self._map_receipt_list(
-                response.transactionGetReceipt.child_transaction_receipts
+                response.transactionGetReceipt.child_transaction_receipts, 
+                include_parent_tx_id=False
             )
 
             parent._set_children(children)
         
         if self.include_duplicates:
+            # Duplicate receipts are related to parent; keep parent transaction_id for context
             duplicates = self._map_receipt_list(
-                response.transactionGetReceipt.duplicateTransactionReceipts
+                response.transactionGetReceipt.duplicateTransactionReceipts,
+                include_parent_tx_id=True
             )
 
             parent._set_duplicates(duplicates)
