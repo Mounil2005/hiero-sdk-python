@@ -19,7 +19,7 @@ permissions:
 jobs:
   add-reviewers-as-assignees:
     name: Add Reviewers as Assignees
-    runs-on: hl-sdk-py-lin-md
+    runs-on: ubuntu-latest
 
     concurrency:
       group: reviewer-assignee-${{ github.event.pull_request.number || inputs.pr_number || github.run_id }}
